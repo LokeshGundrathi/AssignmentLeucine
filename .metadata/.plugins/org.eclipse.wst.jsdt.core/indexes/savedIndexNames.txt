@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+C:\Users\lokes\OneDrive\Desktop\Leucine\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3543015931.index
+79253971.index
+1659028619.index
+1014376269.index
+3539520534.index
+462622570.index
+519050080.index

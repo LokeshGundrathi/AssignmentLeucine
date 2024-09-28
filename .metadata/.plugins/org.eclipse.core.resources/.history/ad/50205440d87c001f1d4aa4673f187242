@@ -1,0 +1,62 @@
+package com.Leucine;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import com.Leucine.Tables.User;
+
+import jakarta.persistence.*;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/submit_registration")
+public class UserRegistration extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html");
+		PrintWriter pw=resp.getWriter();
+		String id=req.getParameter("id");
+		String pwd=req.getParameter("password");
+		String role=req.getParameter("role");
+		String name=req.getParameter("name");
+		String email=req.getParameter("email");
+		String phno=req.getParameter("phone");
+		;
+		
+		User u=new User();
+		u.setId(Integer.parseInt(id));
+		
+		
+		EntityManagerFactory emf=Persistence.createEntityManagerFactory("lokesh");
+		EntityManager em=emf.createEntityManager();
+		EntityTransaction et=em.getTransaction();
+		boolean isInserted = false;
+
+		try {
+		   et.begin();
+		   em.persist(e);
+		   et.commit();
+		   isInserted = true;
+		} catch (Exception ec) {
+		    em.getTransaction().rollback(); 
+		    isInserted = false; 
+		}
+
+		if(isInserted) {
+			pw.println("<h1>Employee Added successfully </h1>");
+			RequestDispatcher rd=req.getRequestDispatcher("OfficialPortal.html");
+			rd.include(req, resp);
+		}
+		else {
+			pw.println("<h1>Provide valid details</h1>");
+			RequestDispatcher rd=req.getRequestDispatcher("AddEmployee.html");
+			rd.include(req, resp);
+		}
+	}
+	
+
+}

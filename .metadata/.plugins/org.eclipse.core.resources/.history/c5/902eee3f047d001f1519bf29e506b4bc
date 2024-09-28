@@ -1,0 +1,56 @@
+<%@page import="jakarta.persistence.EntityManager"%>
+<%@page import="jakarta.persistence.EntityTransaction"%>
+<%@page import="jakarta.persistence.Persistence"%>
+<%@page import="com.Leucine.Tables.StudentTable"%>
+<%@page import="com.Leucine.Tables.User123"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Update Student Year</title>
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .form-container {
+            width: 400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        label, input, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Update Student Year</h2>
+        <form action="UpdateStudent.jsp" method="post">
+            
+
+            <!-- Form for Updating Student Year -->
+            <input type="hidden" name="user_id" value="<%= userId %>">
+            
+            <label for="Uname">Year:</label>
+            <input type="text" id="year" name="year" value="<%= student.getYear() %>" required><br>
+
+            <button type="submit">Update Year</button>
+        </form>
+    </div>
+</body>
+</html>

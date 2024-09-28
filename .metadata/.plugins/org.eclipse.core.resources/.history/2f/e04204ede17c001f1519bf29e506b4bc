@@ -1,0 +1,7 @@
+package com.Leucine.Tables;
+
+public class Student {
+private int id;
+private Department dept;
+private int year;
+}

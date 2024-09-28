@@ -1,0 +1,31 @@
+package com.Leucine.Tables;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
+@Entity
+public class StudentTable {
+	
+	@Id
+	@OneToOne
+	@JoinColumn(name = "user_id")
+private User123 user;
+	
+	@ManyToOne
+	@JoinColumn(name = "dept_id")
+private Department dept;
+
+	@OneToMany
+	@JoinColumn(name = "cour_id")
+private CourseTable cour;
+private String year;
+
+
+
+
+
+}

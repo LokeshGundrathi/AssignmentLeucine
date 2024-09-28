@@ -1,0 +1,63 @@
+package com.Leucine;
+
+import java.io.IOException;
+
+import jakarta.persistence.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/submit_registration")
+public class UserRegistration extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html");
+		PrintWriter pw=resp.getWriter();
+		String name=req.getParameter("employeename");
+		String age=req.getParameter("age");
+		String eid=req.getParameter("employeeid");
+		String sal=req.getParameter("salary");
+		String country=req.getParameter("country");
+		String phno=req.getParameter("phonenumber");
+		String gender=req.getParameter("gender");
+		
+		Employees e=new Employees();
+		e.setEname(name);
+		e.setAge(Integer.parseInt(age));
+		e.setEid(Long.parseLong(eid));
+		e.setSal(Double.parseDouble(sal));
+		e.setCountry(country);
+		e.setMobilenum(Long.parseLong(phno));
+		e.setGender(gender);
+		
+		EntityManagerFactory emf=Persistence.createEntityManagerFactory("lokesh");
+		EntityManager em=emf.createEntityManager();
+		EntityTransaction et=em.getTransaction();
+		boolean isInserted = false;
+
+		try {
+		   et.begin();
+		   em.persist(e);
+		   et.commit();
+		   isInserted = true;
+		} catch (Exception ec) {
+		    em.getTransaction().rollback(); 
+		    isInserted = false; 
+		}
+
+		if(isInserted) {
+			pw.println("<h1>Employee Added successfully </h1>");
+			RequestDispatcher rd=req.getRequestDispatcher("OfficialPortal.html");
+			rd.include(req, resp);
+		}
+		else {
+			pw.println("<h1>Provide valid details</h1>");
+			RequestDispatcher rd=req.getRequestDispatcher("AddEmployee.html");
+			rd.include(req, resp);
+		}
+	}
+	
+
+}

@@ -1,0 +1,87 @@
+<%@page import="jakarta.persistence.EntityManager"%>
+<%@page import="jakarta.persistence.EntityTransaction"%>
+<%@page import="jakarta.persistence.Persistence"%>
+<%@page import="com.Leucine.Tables.StudentTable"%>
+<%@page import="com.Leucine.Tables.Department"%>
+<%@page import="com.Leucine.Tables.CourseTable"%>
+<%@page import="com.Leucine.Tables.User123"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Update Student</title>
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .form-container {
+            width: 400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        label, input, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Update Student Information</h2>
+        <form action="UpdateStudent.jsp" method="post">
+            <%
+                // Setup EntityManager and Transaction
+                EntityManager em = Persistence.createEntityManagerFactory("lokesh").createEntityManager();
+                EntityTransaction et = em.getTransaction();
+                
+                String userId = request.getParameter("user_id");
+                String deptId = request.getParameter("dept_id");
+                String courId = request.getParameter("cour_id");
+                String year = request.getParameter("year");
+
+                if (userId != null && deptId != null && courId != null && year != null) {
+                    // Find and update Student record
+                    et.begin();
+                    StudentTable student = em.find(StudentTable.class, Integer.parseInt(userId));
+                    student.setYear(year);
+                    student.setDept(em.find(Department.class, Integer.parseInt(deptId)));
+                    student.setCour(em.find(CourseTable.class, Integer.parseInt(courId)));
+                    et.commit();
+
+                    out.println("<p>Student details updated successfully!</p>");
+                }
+                // Fetch student for displaying in the form
+                StudentTable student = em.find(StudentTable.class, Integer.parseInt(userId));
+            %>
+
+            <!-- Form for Updating Student -->
+            <input type="hidden" name="user_id" value="<%= userId %>">
+            
+            <label for="dept_id">Department ID:</label>
+            <input type="text" id="dept_id" name="dept_id" value="<%= student.getDept().getDeptId() %>" required><br>
+            
+            <label for="cour_id">Course ID:</label>
+            <input type="text" id="cour_id" name="cour_id" value="<%= student.getCour().getCourseId() %>" required><br>
+
+            <label for="year">Year:</label>
+            <input type="text" id="year" name="year" value="<%= student.getYear() %>" required><br>
+
+            <button type="submit">Update Student</button>
+        </form>
+    </div>
+</body>
+</html>

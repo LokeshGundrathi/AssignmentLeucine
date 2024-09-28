@@ -1,0 +1,38 @@
+package com.Leucine.Tables;
+import jakarta.persistence.*;
+
+public class AdministratorProfile {
+
+	 @Id
+	    @OneToOne
+	    @JoinColumn(name = "user_id", referencedColumnName = "id")
+	    private User user;
+
+
+	    @ManyToOne
+	    @JoinColumn(name = "department_id")
+	    private Department department;
+
+
+		public User getUser() {
+			return user;
+		}
+
+
+		public void setUser(User user) {
+			this.user = user;
+		}
+
+
+		public Department getDepartment() {
+			return department;
+		}
+
+
+		public void setDepartment(Department department) {
+			this.department = department;
+		}
+	    
+	    
+	    
+}

@@ -1,0 +1,8 @@
+package com.Leucine.Tables;
+
+public class FacultyTable {
+private User123 user;
+private Department dept;
+private int officehours;
+
+}

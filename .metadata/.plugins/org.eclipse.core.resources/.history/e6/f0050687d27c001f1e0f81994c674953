@@ -1,0 +1,19 @@
+package com.Leucine.Tables;
+import javax.persistence.*;
+public class FacultyProfile {
+	@Id
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Column(name = "photo")
+    private String photo;
+    
+    @Column(name = "department_id")
+    private int departmentId;
+    
+    @Column(name = "office_hours")
+    private String officeHours;
+
+    // Getters and Setters
+}

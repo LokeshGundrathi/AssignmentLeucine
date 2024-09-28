@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<%@page import="com.Leucine.Tables.User123"%>
+<%@page import="jakarta.persistence.EntityTransaction"%>
+<%@page import="jakarta.persistence.EntityManager"%>
+<%@page import="jakarta.persistence.Persistence"%>
+<%@page import="jakarta.persistence.EntityManagerFactory"%>
+<%@page import="com.Leucine.Tables.StudentTable"%>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+        thead {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        th {
+            font-size: 1.1em;
+        }
+        caption {
+            margin: 10px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .registration-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .registration-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group select {
+            cursor: pointer;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+        .button {
+            background-color: #4CAF50; /* Green background */
+            border: none; /* No border */
+            color: white; /* White text */
+            padding: 15px 32px; /* Padding around text */
+            text-align: center; /* Center text */
+            text-decoration: none; /* No underline */
+            display: inline-block; /* Inline element */
+            font-size: 16px; /* Text size */
+            margin: 4px 2px; /* Small margin */
+            cursor: pointer; /* Pointer on hover */
+            border-radius: 12px; /* Rounded corners */
+        }
+
+        .button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+ <form action="" method="post">
+<div class="form-group">
+                <label for="id">Student ID:</label>
+                <input type="text" id="id" name="id" required>
+            </div>
+            
+  </form> 
+  <%
+  EntityManagerFactory emf =Persistence.createEntityManagerFactory("lokesh");
+  EntityManager em=emf.createEntityManager();
+  EntityTransaction et=em.getTransaction();
+  
+        // Check if the form has been submitted by checking for a 'POST' request and if 'id' is present
+        String studentId = request.getParameter("id");
+       et.begin();
+       StudentTable s=em.find(StudentTable.class, Integer.parseInt(studentId));
+       User123 u=s.getUser();
+    %>  
+    <table>
+    <thead>
+    <tr>
+    <th>UID</th>
+    <th>UNAME</th>
+    <th>ROLE</th>
+    <th>NAME</th>
+    <th>EMAIL</th>
+    <th>PHONENUMBER</th>
+    <th>DNAME</th>
+    <th>CNAME</th>
+    <th>YEAR</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td> <%= u.getId() %> </td>
+    </tr>
+    </tbody>
+    </table>
+</body>
+</html>

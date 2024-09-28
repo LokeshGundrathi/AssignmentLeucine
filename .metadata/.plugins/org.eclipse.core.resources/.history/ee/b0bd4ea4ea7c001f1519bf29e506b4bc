@@ -1,0 +1,15 @@
+package com.Leucine.Tables;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+
+@Entity
+public class AdminstrationTable {
+
+	@Id
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User123 user;
+}

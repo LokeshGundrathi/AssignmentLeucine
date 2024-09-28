@@ -1,0 +1,19 @@
+package com.Leucine.Tables;
+
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+
+public class FacultyTable {
+	
+	@Id
+	@OneToOne
+private User123 user;
+	
+	@ManyToOne
+	@JoinColumn(name = "dept_id")
+private Department dept;
+private int officehours;
+
+}

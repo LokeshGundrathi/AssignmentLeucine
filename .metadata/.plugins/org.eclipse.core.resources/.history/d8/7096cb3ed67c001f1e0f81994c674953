@@ -1,0 +1,16 @@
+package com.Leucine.Tables;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Course {
+	
+	@Id
+private long id;
+private Department dept;
+private String title;
+private String description;
+private FacultyProfile fp;
+
+}

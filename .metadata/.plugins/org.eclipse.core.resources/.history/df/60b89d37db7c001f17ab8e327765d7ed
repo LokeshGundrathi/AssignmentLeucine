@@ -1,0 +1,59 @@
+package com.Leucine.Tables;
+import java.util.Set;
+
+import jakarta.persistence.*;
+
+
+public class FacultyProfile {
+	
+	@Id
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+  
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    @Column(name = "office_hours")
+    private String officeHours;
+
+    @OneToMany(mappedBy = "faculty")
+    private Set<Course> courses;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	public String getOfficeHours() {
+		return officeHours;
+	}
+
+	public void setOfficeHours(String officeHours) {
+		this.officeHours = officeHours;
+	}
+
+	public Set<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(Set<Course> courses) {
+		this.courses = courses;
+	}
+
+    
+}

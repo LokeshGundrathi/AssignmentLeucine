@@ -1,0 +1,16 @@
+package com.Leucine.Tables;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Entity
+public class StudentProfile {
+
+	@Id
+	private long sid;
+	@ManyToOne
+    @JoinColumn(name = "department_id")
+	private Department dept;
+}

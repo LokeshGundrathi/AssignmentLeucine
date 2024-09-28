@@ -1,0 +1,7 @@
+package com.Leucine.Tables;
+
+public class AdministratorProfile {
+
+	private long id;
+	private Department dept;
+}

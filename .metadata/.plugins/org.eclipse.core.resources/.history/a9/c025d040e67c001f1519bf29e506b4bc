@@ -1,0 +1,37 @@
+package com.Leucine.Tables;
+
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+
+public class StudentTable {
+	
+	@Id
+	@OneToOne
+private User123 user;
+	
+	@OneToOne
+private Department dept;
+private String year;
+
+public User123 getUser() {
+	return user;
+}
+public void setUser(User123 user) {
+	this.user = user;
+}
+public Department getDept() {
+	return dept;
+}
+public void setDept(Department dept) {
+	this.dept = dept;
+}
+public String getYear() {
+	return year;
+}
+public void setYear(String year) {
+	this.year = year;
+}
+
+
+
+}

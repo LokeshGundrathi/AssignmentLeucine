@@ -1,0 +1,10 @@
+package com.Leucine.Tables;
+
+public class Course {
+private int id;
+private Department dept;
+private String title;
+private String description;
+private FacultyProfile fp;
+
+}

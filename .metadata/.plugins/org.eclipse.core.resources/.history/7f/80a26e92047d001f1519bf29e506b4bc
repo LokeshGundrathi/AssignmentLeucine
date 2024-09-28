@@ -1,0 +1,74 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.Leucine.Tables.User123" %>
+<%@ page import="javax.persistence.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.io.IOException" %>
+<%@ page import="javax.servlet.ServletException" %>
+
+<%
+    // Database connection setup
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("YourPersistenceUnitName");
+    EntityManager em = emf.createEntityManager();
+    EntityTransaction transaction = em.getTransaction();
+
+    String message = "";
+    User123 user = null;
+
+    // Handle form submission
+    if ("POST".equalsIgnoreCase(request.getMethod())) {
+        String userId = request.getParameter("userId");
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+
+        transaction.begin();
+        try {
+            user = em.find(User123.class, userId);
+            if (user != null) {
+                // Update user details
+                if (name != null && !name.isEmpty()) {
+                    user.setName(name); // Assuming there is a setName method
+                }
+                if (email != null && !email.isEmpty()) {
+                    user.setEmail(email); // Assuming there is a setEmail method
+                }
+                em.merge(user);
+                message = "User details updated successfully.";
+            } else {
+                message = "User not found.";
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            message = "Error updating user: " + e.getMessage();
+        } finally {
+            em.close();
+        }
+    }
+%>
+
+<html>
+<head>
+    <title>Update User Details</title>
+</head>
+<body>
+<h2>Update User Information</h2>
+
+<form method="post">
+    <label for="userId">User ID:</label>
+    <input type="text" name="userId" required/><br/><br/>
+
+    <label for="name">Name:</label>
+    <input type="text" name="name"/><br/><br/>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email"/><br/><br/>
+
+    <input type="submit" value="Update User"/>
+</form>
+
+<% if (!message.isEmpty()) { %>
+    <h3><%= message %></h3>
+<% } %>
+
+</body>
+</html>

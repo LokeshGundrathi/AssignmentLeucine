@@ -1,0 +1,18 @@
+package com.Leucine.Tables;
+
+import jakarta.persistence.*;
+
+
+
+@Entity
+public class User {
+	
+	private int id;
+	private String uname;
+	private String pwd;
+	private String role;
+	private String name;
+	private String email;
+	private String phno;
+	
+}

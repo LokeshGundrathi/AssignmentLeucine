@@ -1,0 +1,11 @@
+package com.Leucine.Tables;
+
+public class User {
+private long user_id;
+private String user_name;
+private String pwd;
+private String role;
+private String name;
+private String email;
+private long mobilenum;
+}

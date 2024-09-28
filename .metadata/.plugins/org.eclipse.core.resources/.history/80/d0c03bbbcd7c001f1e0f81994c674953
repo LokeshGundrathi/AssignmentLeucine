@@ -1,0 +1,8 @@
+package com.Leucine;
+
+import jakarta.servlet.annotation.WebServlet;
+
+@WebServlet("/submit_registration")
+public class UserRegistration {
+
+}

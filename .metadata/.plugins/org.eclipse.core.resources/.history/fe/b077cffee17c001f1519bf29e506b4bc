@@ -1,0 +1,15 @@
+package com.Leucine.Tables;
+
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+
+public class Student {
+	
+	@Id
+	@OneToOne
+private User123 user;
+	
+	@OneToOne
+private Department dept;
+private int year;
+}

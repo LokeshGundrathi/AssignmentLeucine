@@ -1,0 +1,11 @@
+package com.Leucine.Tables;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class Enrollment {
+
+	private long id;
+	private StudentProfile st;
+	private Course c;
+}
